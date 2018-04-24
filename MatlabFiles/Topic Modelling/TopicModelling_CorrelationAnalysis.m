@@ -38,8 +38,21 @@ W = sortrows(W,'Var3','descend');
  
 %Inspect top 10 
 M = sortrows(M,'HomelessPopDensity','descend');
-disp("Original Matrix")
-disp(origMat(1:5,:))
-disp("Percentile Ranked Matrix")
-disp(normMat(1:5,:))
-disp(M(1:5,:))
+
+%homelesspop = W(2:k+1).h(:,11);
+homelesspop = table2array(M(:,end));
+
+coorany = {};
+for j = 2:k+1
+    Wj = table2array(W(:,j));
+    coorany{j} = corrcoef(Wj,homelesspop);
+end
+
+disp(strcat("Correlation coefficients with percentile ranks when k=3")
+for i = 1:k
+    disp(strcat("For topic ", num2str(i)))
+    disp(coorany{i+1})
+end
+
+
+
