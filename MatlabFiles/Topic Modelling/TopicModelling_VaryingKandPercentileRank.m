@@ -6,19 +6,11 @@ origMat = cell2mat(table2cell(data(:,[32,33,34,28,29,30,31,2,3,22, 26])));
 [n,m] = size(origMat);
  
 %Normalize, get matrix of form normMat (n x m) H (n x k) and W(k x m)
-normMat = [];
-for j = 1:m % go through columns
-    minX = min(origMat(:,j));
-    maxX = max(origMat(:,j));
-    for i = 1:n % go through rows
-        norm_data = (origMat(i,j) - minX) / ( maxX - minX);
-        normMat(i,j) = norm_data;
-    end
-end
+normMat = tiedrank(origMat) / n;
  
  
 %Varying k
-for k = 2:10 
+for k = 2:3
  
 %NNMF algorithm in Matlab
 [w,h] = nnmf(normMat,k);

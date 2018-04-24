@@ -46,4 +46,3 @@ W = sortrows(W,'Var3','descend');
  
 %Inspect top 10 
 M = sortrows(M,'HomelessPopDensity','descend');
-disp(H)
